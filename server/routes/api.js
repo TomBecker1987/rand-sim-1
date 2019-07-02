@@ -10,8 +10,8 @@ router.get('/todos', function (req, res) {
 
 router.post('/todo', function (req, res) {
     const text = req.body.text
-    const newTodo = { id: id++, text: text, complete: false }
-
+    const newTodo = { id: id++, text: text, complete: false, priority: 'low' }
+    console.log(newTodo)
     todos.push(newTodo)
     res.send(todos)
 })
@@ -21,9 +21,16 @@ router.put('/todo/:todoID', function (req, res) {
 
     const comp = todos.find(t => t.id == todoID).complete 
     comp ? todos.find(t => t.id == todoID).complete = false : todos.find(t => t.id == todoID).complete = true;
-    // todos.find(t => t.id == todoID).complete = true
     res.send(todos)
 })
+
+// router.put('/todo/:todoID', function (req, res) {
+//     const todoID = req.params.todoID
+
+//     const comp = todos.find(t => t.id == todoID). 
+//     comp ? todos.find(t => t.id == todoID).complete = false : todos.find(t => t.id == todoID).complete = true;
+//     res.send(todos)
+// })
 
 router.delete('/todo/:todoID', function (req, res) {
     const todoID = req.params.todoID
@@ -32,7 +39,6 @@ router.delete('/todo/:todoID', function (req, res) {
             todos.splice(index,1)
         }
     }
-    // todos.splice(todoID-1, 1)
 
     res.send(todos)
 })

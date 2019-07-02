@@ -5,7 +5,7 @@ const render = function (todos) {
 
     todos.forEach(todo => {
         $("#todos").append(`
-        <div data-id=${todo.id} class="todo ${todo.complete ? 'complete' : ''}">
+        <div data-id=${todo.id} class="todo ${todo.priority} ${todo.complete ? 'complete' : ''}">
             <i class="fas fa-check-circle"></i>
             <span class=text>${todo.text}</span>
             <span class="delete"><i class="fas fa-trash"></i></span>
@@ -40,5 +40,15 @@ $("#todos").on("click", ".fa-trash", function () {
         success: todos => render(todos)
     })
 })
+
+// $("#todos").on("click", ".todo", function (){
+//     const id = $(this).closest(".todo").data(`id`)
+//     // const priority = todos.filter(t=>t)
+//     $.ajax({
+//         method: "PUT",
+//         url: "/todo/" + id,
+//         success: todos => render(todos)
+//     })
+// })
 
 $.get('/todos', todos => render(todos))
